@@ -101,9 +101,9 @@ body{
     justify-content: center;
     position: absolute;
     right: 20px;
-    bottom: 40px;
+    bottom: 100px;
     opacity: 0;
-    transition: all 1s ease-out;
+    transition: all 0.2s ease-out;
 }
 /* testing */
 .card:hover{ 
@@ -147,7 +147,7 @@ body{
 .playbar{
     position: fixed;
     bottom: 30px;
-    background-color:#3be63b;
+    background-color:#3aac3a;
     height: 40px;
     width: 90%;
     width: 70vw;
@@ -194,7 +194,7 @@ justify-content: space-between;
     width: 300px;
 }
 .playbar .seekbar{
-    height: 5px;
+    height: 8px;
     width: 97%;
     border-radius: 10px;
     border: 2px solid green;
@@ -202,6 +202,7 @@ justify-content: space-between;
     position: absolute;
     bottom: 0;
     margin: 6px;
+    cursor: pointer;
 }
 .seekbar .circle{
     height: 15px;
@@ -211,10 +212,17 @@ justify-content: space-between;
     border-radius: 20px;
     position: relative;
     left: 0;
-    bottom: 8px;
+    bottom: 6px;
     transition: left 0.5s;
     
 }
  .playbuttons img{
     cursor: pointer;
+}
+.songname, .songduration{
+    padding: 0 15px;
+}
+.songNavSec{
+    display: flex;
+    justify-content: space-between;
 }
