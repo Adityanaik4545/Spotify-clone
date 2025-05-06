@@ -12,6 +12,12 @@ body{
     width: 25vw;
     padding: 10px;
 }
+.hamburger{
+    display: none;
+}
+.left .close{
+    display: none;
+}
 
 .home ul li{
     display: flex;
@@ -66,6 +72,9 @@ body{
     padding: 20px;
 }
 .spotifyPlaylist{
+    padding: 16px;
+}
+.spotifyPlaylist h1{
     padding: 16px;
 }
 .cardContainer{
@@ -145,14 +154,17 @@ body{
 
 }
 .playbar{
-    position: fixed;
-    bottom: 30px;
-    background-color:#3aac3a;
-    height: 40px;
-    width: 90%;
-    width: 70vw;
-    padding: 10px;
-    border-radius: 10px;
+    display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        bottom: 30px;
+        background-color: #3aac3a;
+        min-height: 40px;
+        width: 90%;
+        width: 70vw;
+        padding: 10px;
+        border-radius: 10px;
 
 }
 .playbuttons{
@@ -195,13 +207,13 @@ justify-content: space-between;
 }
 .playbar .seekbar{
     height: 8px;
-    width: 97%;
+    width: 98%;
     border-radius: 10px;
     border: 2px solid green;
     background-color: black;
     position: absolute;
     bottom: 0;
-    margin: 6px;
+    margin: 4px;
     cursor: pointer;
 }
 .seekbar .circle{
@@ -219,10 +231,77 @@ justify-content: space-between;
  .playbuttons img{
     cursor: pointer;
 }
-.songname, .songduration{
-    padding: 0 15px;
+.songname{
+    padding: 0 12px;
+    width: 250px;
+}
+
+.songduration{
+    padding: 0 12px;
+    /* width: 125px; */
 }
 .songNavSec{
     display: flex;
     justify-content: space-between;
+    margin: 15px 0;
+    width: 100%;
+}
+@media (max-width:1450px) {
+    .left{
+        background-color: black;
+        position: absolute;
+        z-index: 1;
+        left: -120%;
+        transition: all 0.5s;
+        width: 370px;
+    }
+    .playbar{
+        width: calc( 100vw - 60px)
+    }
+    .playbar .seekbar {
+        width: calc( 100vw - 70px)
+        
+    }
+    .right{
+        width: 100vw;
+        margin: 0;
+    }
+    .hamburger{
+        display: block;
+    }
+    .hamburgercontainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+    }
+    .left .close{
+        position: absolute;
+        right: 30px;
+        top: 35px;
+        width: 30px;
+        display: block;
+    }
+    
+        /* .playbuttons img {
+            width: 20px;
+            height: 20px;
+        } */
+       .card{
+        width: 90vw;
+       } 
+       .cardContainer{
+        margin: 0;
+        justify-content: center;
+       }
+       .songNavSec {
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+        margin: 15px 0;
+        width: 100%;
+        gap: 20px;
+        flex-direction: column;
+    }
+    
 }
