@@ -17,6 +17,9 @@ async function getSongs() {
     
 }
 function convertSecondsToMinutes(seconds) {
+    if (isNaN(seconds) || seconds < 0) {
+        return "00:00"
+    }
     const totalSeconds = Math.floor(seconds); 
     const minutes = Math.floor(totalSeconds / 60);
     const remainingSeconds = totalSeconds % 60;
@@ -94,10 +97,16 @@ previous.addEventListener("click",()=>{
     })
     // working for nxt button
     next.addEventListener("click",()=>{
+        currentSong.pause()
         let index=songs.indexOf(currentSong.src.split("/").splice(-1)[0])
         if ((index+1)<songs.length) {
             playMusic(songs[index+1])
         }
+    })
+    // volume btn
+    document.querySelector(".volume").getElementsByTagName("input")[0].addEventListener("change",(e)=>{
+        console.log(e.target.value)
+        currentSong.volume=parseInt(e.target.value)/100;
     })
 }
 main()
