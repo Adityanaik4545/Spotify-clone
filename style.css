@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+:root{
+    --a:0;
+}
 *{
     padding: 0;
     margin: 0;
@@ -86,7 +89,8 @@ body{
     overflow-y:auto;
 }
  .card{
-    width: 200px;
+     width: 200px;
+     transition: 0.8s;
     padding: 10px;
     border-radius: 10px;
     background-color: #252525;
@@ -110,17 +114,22 @@ body{
     justify-content: center;
     position: absolute;
     right: 20px;
-    bottom: 100px;
-    opacity: 0;
+    bottom: 110px;
+    opacity: var(--a);
     transition: all 0.2s ease-out;
 }
+.card:hover{
+    background-color: rgb(52, 52, 52);
+    cursor: pointer;
+    --a:1;
+   } 
 /* testing */
-.card:hover{ 
+/* .card:hover{ 
     .play{
         bottom: 110px;
         opacity: 1;
     }
-}
+} */
 .buttons>*{
     margin: 0 12px;
 }
@@ -205,6 +214,10 @@ justify-content: space-between;
     font-size: 14px;
     width: 300px;
 }
+/* test */
+.info div{
+    word-break: break-all;
+}
 .playbar .seekbar{
     height: 8px;
     width: 98%;
@@ -238,7 +251,21 @@ justify-content: space-between;
 
 .songduration{
     padding: 0 12px;
-    /* width: 125px; */
+    width: 125px;
+    /* extra */
+    margin-bottom:2px ;
+
+}
+.timevol{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.volume{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 .songNavSec{
     display: flex;
@@ -246,7 +273,7 @@ justify-content: space-between;
     margin: 15px 0;
     width: 100%;
 }
-@media (max-width:1450px) {
+@media (max-width:1350px) {
     .left{
         background-color: black;
         position: absolute;
@@ -254,6 +281,7 @@ justify-content: space-between;
         left: -120%;
         transition: all 0.5s;
         width: 370px;
+        padding: 0;
     }
     .playbar{
         width: calc( 100vw - 60px)
@@ -282,13 +310,8 @@ justify-content: space-between;
         width: 30px;
         display: block;
     }
-    
-        /* .playbuttons img {
-            width: 20px;
-            height: 20px;
-        } */
        .card{
-        width: 90vw;
+        width: 40vw;
        } 
        .cardContainer{
         margin: 0;
@@ -303,5 +326,25 @@ justify-content: space-between;
         gap: 20px;
         flex-direction: column;
     }
+    .songname,.songduration {
+        padding: 0 12px;
+        width: auto;
+    }
+    .songduration {
+        padding: 0 12px;
+        width: auto;
+    }
+    .timevol{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+        gap: 10px;
+    }
     
+}
+@media (max-width:400px) {
+    .card{
+        width: 70vw;
+       } 
 }
