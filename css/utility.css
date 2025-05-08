@@ -1,0 +1,53 @@
+.flex{
+    display: flex;
+}
+.border{
+    border: 2px solid blue;
+    margin: 5px;
+}
+.justify-content{
+    justify-content: center;
+}
+.align-item{
+    align-items: center;
+}
+.bg-black{
+    background-color: black;
+    color: white;
+}
+.bg-grey{
+    background-color: #1f1f1f;
+    color: white;
+}
+.invert{
+    filter: invert(1);
+}
+.rounded{
+    border-radius: 8px;
+}
+.m-1{
+    margin: 5px;
+}
+.p-1{
+    padding: 10px;
+}
+/* Scrollbar Styling for WebKit browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #121212; /* Dark background */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #222; /* Spotify green */
+    border-radius: 6px;
+    border: 2px solid #121212; /* Creates padding around thumb */
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #222 #121212;
+}
