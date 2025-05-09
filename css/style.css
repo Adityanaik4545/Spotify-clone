@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-:root{
+/* :root{
     --a:0;
-}
+} */
 *{
     padding: 0;
     margin: 0;
@@ -90,7 +90,7 @@ body{
 }
  .card{
      width: 200px;
-     height: 300px;
+     height: 330px;
      transition: 0.8s;
     padding: 10px;
     border-radius: 10px;
@@ -115,22 +115,25 @@ body{
     justify-content: center;
     position: absolute;
     right: 20px;
-    bottom: 110px;
-    opacity: var(--a);
+    bottom: 120px;
+    opacity: 0;
+    /* opacity: var(--a); */
     transition: all 0.2s ease-out;
 }
-.card:hover{
+/* .card:hover{
     background-color: rgb(52, 52, 52);
     cursor: pointer;
     --a:1;
-   } 
+   }  */
 /* testing */
-/* .card:hover{ 
+.card:hover{ 
+    background-color: rgb(52, 52, 52);
+    cursor: pointer;
     .play{
-        bottom: 110px;
+        bottom: 140px;
         opacity: 1;
     }
-} */
+}
 .buttons>*{
     margin: 0 12px;
 }
@@ -313,13 +316,16 @@ justify-content: space-between;
     }
        .card{
         width: 40vw;
+        height: auto;
        } 
        .cardContainer{
         margin: 0;
         justify-content: center;
+        max-height: 50vh;
        }
        .songNavSec {
         display: flex;
+        max-height: 140px;
         align-items: center;
         /* justify-content: center; */
         margin: 15px 0;
@@ -346,6 +352,10 @@ justify-content: space-between;
 }
 @media (max-width:400px) {
     .card{
-        width: 70vw;
+        width: 35vw;
+        height:auto ;
        } 
+       .cardContainer{
+        max-height: 50vh;
+    }
 }
