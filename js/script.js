@@ -1,9 +1,10 @@
 let currentSong = new Audio();
 let songs;
 let currfolder;
+// below function is used to get the songs from the folder and make array of songs from which we can play songs by accessing index of array and display them in library section
 async function getSongs(folder) {
     currfolder = folder;
-    let a = await fetch(`http://192.168.110.67:5500/${folder}/`);
+    let a = await fetch(`/${folder}/`);
     let response = await a.text();
     let div = document.createElement("div");
     div.innerHTML = response;
@@ -12,11 +13,11 @@ async function getSongs(folder) {
     for (let index = 0; index < as.length; index++) {
         const element = as[index];
         if (element.href.endsWith(".mp3")) {
-            songs.push(element.href.split(`/${folder}/`)[1])
+            songs.push(element.href.split(`/${folder}/`)[1]);
         }
     }
-    let songUl = document.querySelector(".songList").getElementsByTagName("ul")[0]
-    songUl.innerHTML = ""
+    let songUl = document.querySelector(".songList").getElementsByTagName("ul")[0];
+    songUl.innerHTML = "";
     for (const song of songs) {
         songUl.innerHTML = songUl.innerHTML + `<li><img class="invert" src="image/music.svg" alt="">
                         <div class="info">
@@ -30,15 +31,15 @@ async function getSongs(folder) {
     }
     Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e => {
         e.addEventListener("click", element => {
-            playMusic(e.querySelector(".info").firstElementChild.innerHTML)
+            playMusic(e.querySelector(".info").firstElementChild.innerHTML);
         })
     })
-    return songs
-
+    return songs;
 }
+// this function is used to convert seconds to minutes for song duration
 function convertSecondsToMinutes(seconds) {
     if (isNaN(seconds) || seconds < 0) {
-        return "00:00"
+        return "00:00";
     }
     const totalSeconds = Math.floor(seconds);
     const minutes = Math.floor(totalSeconds / 60);
@@ -49,31 +50,31 @@ function convertSecondsToMinutes(seconds) {
 
     return `${formattedMinutes}:${formattedSeconds}`;
 }
-
+// this function handles the play and pause functionality of the music
 const playMusic = (track, pause = false) => {
-    // let audio=new Audio
     if (!pause) {
-        currentSong.play()
-        play.src = "image/pause.svg"
+        currentSong.play();
+        play.src = "image/pause.svg";
     }
     currentSong.src = `/${currfolder}/` + track;
     currentSong.play()
     document.querySelector(".songname").innerHTML = decodeURI(track);
     document.querySelector(".songduration").innerHTML = "00.00 / 00.00";
 }
+// creates an card for each album and populates song data from info.json file
 async function displayAlbum() {
-    let a = await fetch(`http://192.168.110.67:5500/song/`);
+    let a = await fetch(`/song/`);
     let response = await a.text();
     let div = document.createElement("div");
-    let cardContainer = document.querySelector(".cardContainer")
+    let cardContainer = document.querySelector(".cardContainer");
     div.innerHTML = response;
-    let anchors = div.getElementsByTagName("a")
-    let array = Array.from(anchors)
+    let anchors = div.getElementsByTagName("a");
+    let array = Array.from(anchors);
     for (let index = 0; index < array.length; index++) {
         const e = array[index];
         if (e.href.includes("/song/")) {
-            let folder = e.href.split("/").slice(-2)[1]
-            let a = await fetch(`http://192.168.110.67:5500/song/${folder}/info.json`);
+            let folder = e.href.split("/").slice(-2)[1];
+            let a = await fetch(`/song/${folder}/info.json`);
             let response = await a.json();
             cardContainer.innerHTML = cardContainer.innerHTML + `<div data-folder="${folder}" class="card">
                         <div class="play">
@@ -92,27 +93,27 @@ async function displayAlbum() {
     // load songs in playlist when user clicks on particular card
     Array.from(document.getElementsByClassName("card")).forEach(e => {
         e.addEventListener("click", async item => {
-            songs = await getSongs(`song/${item.currentTarget.dataset.folder}`)
-            playMusic(songs[0])
+            songs = await getSongs(`song/${item.currentTarget.dataset.folder}`);
+            playMusic(songs[0]);
         })
 
     });
 
 }
 async function main() {
-    await getSongs("song/englishRomantic")
-    playMusic(songs[0], true)
+    await getSongs("song/englishRomantic");
+    playMusic(songs[0], true);
 
-    displayAlbum()
+    displayAlbum();
 
     play.addEventListener("click", () => {
         if (currentSong.paused) {
             currentSong.play();
-            play.src = "image/pause.svg"
+            play.src = "image/pause.svg";
         }
         else {
             currentSong.pause();
-            play.src = "image/play.svg"
+            play.src = "image/play.svg";
         }
     })
     currentSong.addEventListener("timeupdate", () => {
@@ -120,30 +121,30 @@ async function main() {
         document.querySelector(".circle").style.left = (currentSong.currentTime / currentSong.duration) * 100 + "%";
     })
     document.querySelector(".seekbar").addEventListener("click", e => {
-        let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100
+        let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
         document.querySelector(".circle").style.left = percent + "%";
-        currentSong.currentTime = ((currentSong.duration) * percent) / 100
+        currentSong.currentTime = ((currentSong.duration) * percent) / 100;
     })
     document.querySelector(".hamburger").addEventListener("click", () => {
-        document.querySelector(".left").style.left = "0"
+        document.querySelector(".left").style.left = "0";
     })
     document.querySelector(".close").addEventListener("click", () => {
-        document.querySelector(".left").style.left = "-120%"
+        document.querySelector(".left").style.left = "-120%";
     })
     // working for previous button
     previous.addEventListener("click", () => {
-        let index = songs.indexOf(currentSong.src.split("/").splice(-1)[0])
+        let index = songs.indexOf(currentSong.src.split("/").splice(-1)[0]);
         if ((index - 1) >= 0) {
-            playMusic(songs[index - 1])
+            playMusic(songs[index - 1]);
         }
     })
     // working for nxt button
     next.addEventListener("click", () => {
-        currentSong.pause()
-        let index = songs.indexOf(currentSong.src.split("/").splice(-1)[0])
+        currentSong.pause();
+        let index = songs.indexOf(currentSong.src.split("/").splice(-1)[0]);
 
         if ((index + 1) < songs.length) {
-            playMusic(songs[index + 1])
+            playMusic(songs[index + 1]);
         }
     })
     // volume btn
@@ -151,17 +152,17 @@ async function main() {
         currentSong.volume = parseInt(e.target.value) / 100;
     })
 
-// added toggle for volume icon
-document.querySelector(".volume > img").addEventListener("click",(e)=>{
-    if (e.target.src.includes("volume.svg")) {
-        e.target.src=e.target.src.replace("volume.svg","mutevol.svg");
-        currentSong.volume=0;
-        document.querySelector(".range").getElementsByTagName("input")[0].value=0;
-    } else {
-        e.target.src=e.target.src.replace("mutevol.svg","volume.svg");
-        currentSong.volume=.10;
-    document.querySelector(".range").getElementsByTagName("input")[0].value=10
-    }
-}) 
+    // added toggle for volume icon
+    document.querySelector(".volume > img").addEventListener("click", (e) => {
+        if (e.target.src.includes("volume.svg")) {
+            e.target.src = e.target.src.replace("volume.svg", "mutevol.svg");
+            currentSong.volume = 0;
+            document.querySelector(".range").getElementsByTagName("input")[0].value = 0;
+        } else {
+            e.target.src = e.target.src.replace("mutevol.svg", "volume.svg");
+            currentSong.volume = .10;
+            document.querySelector(".range").getElementsByTagName("input")[0].value = 10;
+        }
+    })
 }
-main() 
+main();
