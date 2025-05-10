@@ -278,11 +278,23 @@ justify-content: space-between;
     width: 100%;
 }
 @media (max-width:1350px) {
+    .play{
+    width: 40px;
+    height: 40px;
+}
+    .card:hover{ 
+    background-color: rgb(52, 52, 52);
+    cursor: pointer;
+    .play{
+        bottom: 120px;
+        opacity: 1;
+    }
+}
     .left{
         background-color: black;
         position: absolute;
         z-index: 1;
-        left: -120%;
+        left: -150%;
         transition: all 0.5s;
         width: 370px;
         padding: 0;
@@ -315,13 +327,15 @@ justify-content: space-between;
         display: block;
     }
        .card{
-        width: 40vw;
+        width: 39vw;
         height: auto;
        } 
        .cardContainer{
         margin: 0;
         justify-content: center;
         max-height: 50vh;
+        margin-bottom: 30vh;
+        
        }
        .songNavSec {
         display: flex;
@@ -356,6 +370,39 @@ justify-content: space-between;
         height:auto ;
        } 
        .cardContainer{
-        max-height: 50vh;
+        max-height:unset;
+        margin-bottom: 30vh;
     }
+    .playbar{
+    right: 20px;
+}
+.library{
+    height: 85vh;
+}
+.left{
+    height: 100vh;
+    position: fixed;
+    top: 0;
+}
+}
+@media (max-width:300px) {
+    .header>*{
+            padding: 2px;
+    }
+    .buttons>* {
+    margin: 0 10px;
+}
+    .card {
+        width: 100%;
+    }
+        .cardContainer {
+        max-height: unset;
+        overflow-y: unset;
+    }
+    .spotifyPlaylist h1 {
+    padding: 5px;
+}
+.playbar{
+    right: 20px;
+}
 }
